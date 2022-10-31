@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+ד{% extends "base.html" %}
 {% block content %}
 
 {% for message in get_flashed_messages() %}
@@ -16,9 +16,7 @@
 
 		{{ form.title.label(class="form-label") }}
 		{{ form.title(class="form-control") }} 
-		<br/>
-		{{ form.author.label(class="form-label") }}
-		{{ form.author(class="form-control") }}
+
 		<br/>
 		{{ form.slug.label(class="form-label") }}
 		{{ form.slug(class="form-control") }}
@@ -30,6 +28,7 @@
 
 	</form>
 
-
+	 {{ ckeditor.load() }}
+	 {{ ckeditor.config(name='content') }}
 
 {% endblock %}

@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% for message in get_flashed_messages() %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  	{{ message }}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
+
+
+
+	<h1>Dashboard</h1>
+	<br>
+
+
+<div class="card">
+  <h5 class="card-header">{{ current_user.name }}</h5>
+  <div class="card-body">
+    <h5 class="card-title">User Dashboard</h5>
+      <div class="container">
+        <div class="row">
+          <div class="col-8">
+            <p class="card-text"><strong>Name: </strong>{{ current_user.name }}</p>
+            <p class="card-text"><strong>Username: </strong>{{ current_user.username }}</p>
+            <p class="card-text"><strong>User ID: </strong>{{ current_user.id }}</p>
+            <p class="card-text"><strong>Email: </strong>{{ current_user.email }}</p>
+            <p class="card-text"><strong>Favorite Music: </strong>{{ current_user.favorite_music }}</p>
+            <p class="card-text"><strong>Date Joined: </strong>{{ current_user.date_added }}</p>
+            <a href="{{ url_for('logout') }}" class="btn btn-secondary btn-sm">Logout</a>
+            <a href="{{ url_for('update_user', id=current_user.id) }}" class="btn btn-success btn-sm">Edit Profile</a> 
+            <a href="{{ url_for('delete', id=current_user.id) }}" class="btn btn-danger btn-sm">Delete</a> 
+          </div>
+            <div class="col-4">
+              <img src="{{ url_for('static', filename='images/user-profile-delault.jpeg') }}">
+            </div>
+        </div>
+      </div>
+  </div>
+</div>
+
+
+
+
+
+{% endblock %}

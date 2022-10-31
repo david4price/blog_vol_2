@@ -8,41 +8,46 @@
 </div>
 {% endfor %}
 
-{% if name %}
-	<h1>Update User!</h1>
-	<br/><br/>
-<table class="table table-bordered table-striped table-hover">
-{% for our_user in our_users %}
-	<tr>
-	<td>{{ our_user.id }}. {{ our_user.name }} - {{ our_user.email }} - {{ our_user.favorite_music }}</td>
-	</tr>
+{% if id == current_user.id %}
+
+
+
+	<h1>Update User Profile</h1>
 	<br/>
-{% endfor %}
-</table>
+	<div class="shadow p-3 mb-5 bg-body rounded">
+		<form action="/update/{{name_to_update.id}}" method="POST" enctype="mulitpart/form-data">
+			{{ form.hidden_tag() }}
+
+			{{ form.name.label(class="form-label") }}
+			{{ form.name(class="form-control", value=name_to_update.name) }}
+			<br/>
+			{{ form.username.label(class="form-label") }}
+			{{ form.username(class="form-control", value=name_to_update.username) }}
+			<br/>
+			{{ form.email.label(class="form-label") }}
+			{{ form.email(class="form-control", value=name_to_update.email) }}
+			<br/>
+			{{ form.about_author.label(class="form-label") }}
+			<!-- {{ form.about_author(class="form-control", value=name_to_update.about_author) }} -->
+			<textarea name="about_author" class="form-control">{{ name_to_update.about_author }}</textarea>
+			<br/>
+			{{ form.profile_pic.label(class="form-label") }}
+			{{ form.profile_pic(class="form-control", value=name_to_update.profile_pic) }}
+			<br/>
+			{{ form.submit(class="btn btn-secondary") }} <a href="{{ url_for('delete', id=current_user.id) }}" class="btn btn-danger">Delete</a> 
+
+		</form>
+	</div> 
+	<br/><br/><br/>
 
 {% else %}
-	<h1>Update User...</h1>
-	<br/>
-<div class="shadow p-3 mb-5 bg-body rounded">
-	<form action="/update/{{name_to_update.id}}" method="POST">
-		{{ form.hidden_tag() }}
+	<div class="alert alert-danger alert-dismissible fade show" role="alert">
+  	Insufficient Permissions
+  	<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+	</div>
 
-		{{ form.name.label(class="form-label") }}
-		{{ form.name(class="form-control", value=name_to_update.name) }}
-		<br/>
-		{{ form.email.label(class="form-label") }}
-		{{ form.email(class="form-control", value=name_to_update.email) }}
-		<br/>
-		{{ form.favorite_music.label(class="form-label") }}
-		{{ form.favorite_music(class="form-control", value=name_to_update.favorite_music) }}
-		<br/>
-		{{ form.submit(class="btn btn-secondary") }} <a href="{{ url_for('delete', id=id) }}" class="btn btn-danger">Delete</a> 
+	<h2>GET LOST!!!</h2>
 
-	</form>
-</div> 
-	<br/><br/><br/>
 {% endif %}
-
-
 
 {% endblock %}
