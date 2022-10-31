@@ -242,17 +242,6 @@ def delete(id):
 			name=name, our_users=our_users)
 
 
-# JSON
-@app.route('/date')
-def get_current_date():
-	favorite_pizza = {
-	"David": "Mushrooms",
-	"Alina": "Olives"
-	}
-	# return {"Date": date.today()}
-	return favorite_pizza
-
-
 # View Post Page
 @app.route('/posts/<int:id>')
 def post(id):
